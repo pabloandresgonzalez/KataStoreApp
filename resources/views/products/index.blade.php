@@ -6,12 +6,12 @@
   	<div class="col-md-12">
     <div class="card  card-plain">
       <div class="card-header">
-        <h4 class="card-title"> Services</h4>
-        <p class="category"> Validate and manage your services</p>        
+        <h4 class="card-title"> products</h4>
+        <p class="category"> Validate and manage your products</p>        
       </div>
 
       <div>
-        <a href="{{ route('createproduct')  }}" class="btn btn-primary btn-link">New service</a>
+        <a href="{{ route('createproduct')  }}" class="btn btn-primary btn-link">New product</a>
       </div>
 
       <div class="card-body">

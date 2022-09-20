@@ -7,9 +7,9 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-5 col-md-6">
                         <h1 class="text-white">{{ __('Kata Store') }}</h1>
-                        <p class="text-lead text-light">
-                            {{ __('Hello!') }}
-                        </p>
+                        <h3 class="text-lead text-light">
+                            {{ __('Hello, welcome to the best page you can buy online!') }}
+                        </h3>
 
                     </div>
                   </div>
@@ -64,21 +64,23 @@
                                 </tbody>
                               </table>
                               <p>Detalle: {{ $product->description }}</p>
-                              <a type="button" href="{{ url('/products/'.$product->id.'/edit') }}" class="btn btn-primary">Pay</a>
+                              <a type="button" href="{{ url('/pedidos/'.$product->id.'/create') }}" class="btn btn-primary">Pay</a>
+                              
                                   <hr>
-                                  <p>Si quieres paga con Nequi o daviplata al # 3008905764</p>
-                                  <tr>
-                                    <td class="storetr">Nequi&nbsp;</td>
-                                    <td><img  src="{{ asset('img/imgnequiqr.jpeg') }}"></td>
+                                  <p>Puedes comprar con Nequi al # 3008905764</p>
+                                  <tr>                                    
+                                    <td><img  src="{{ asset('img/imgnequiqr.PNG') }}"></td>
                                   </tr>
-                                    <td class="storetr">Daviplata&nbsp;</td>
-                                    <td><img  src="{{ asset('img/imgnequiqr.jpeg') }}"></td>
+                                  <hr>
+                                    <p>Con Daviplata al # 3008905764</p>
+                                    <td><img  src="{{ asset('img/imgnequiqr.PNG') }}"></td>
                                   <tr> 
                                     <hr>
-                                  <a type="button" href="https://wa.me/573144534311?text=%20Hola! %20estoy%20interezado%20en%20este%20producto%20:%20{{  $product->name }}%20id:%20{{  $product->id }}" class="btn btn-info" target="_blank" >Message</a>
+                                    <p>Si lo deseas puedes comunicarte con nosotros</p>
+                                  <a type="button" href="https://wa.me/573008905764?text=%20Hola! %20estoy%20interezado%20en%20este%20producto%20:%20{{  $product->name }}%20id:%20{{  $product->id }}" class="btn btn-info" target="_blank" >Message</a>
                           </div>
                           <div class="modal-footer">
-                            <a style="color: black;text-align: center;" href="">Al completar la compra, aceptas estos T y C.</a>
+                            <a href="">Términos y condiciones.</a>
                            <br>
 
                           </div>

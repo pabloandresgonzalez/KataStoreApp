@@ -6,13 +6,36 @@
   	<div class="col-md-12">
     <div class="card  card-plain">
       <div class="card-header">
-        <h4 class="card-title"> Orders</h4>
+        <h4 class="card-title"> Orders  </h4>
         <p class="category"> Validate and manage your orders</p>        
       </div>
+      
+
+      @if(session('message'))
+          <div class="alert alert-success alert-dismissible">
+            {{ session('message') }}
+            <button type="button" class="close" data-dismiss="alert">
+              <span>x</span>
+            </button>
+          </div>
+      @endif
 
       <div>
         <a href="{{ route('createproduct')  }}" class="btn btn-primary btn-link">New order</a>
       </div>
+
+      <!-- Form -->
+      <form class="">
+        <div class="form-group mb-0">
+          <div class="input-group input-group-alternative">
+            <div class="input-group-prepend">
+              <span class="input-group-text thead-dark"><i class="fas fa-search"></i></span>
+            </div>
+            <input name="buscarpor" class="form-control" placeholder="Buscar" type="text">
+              <!-- <button class="btn btn-secondary btn-sm" type="submit">Buscar</button> -->
+            </div>
+        </div>
+      </form>
 
       <div class="card-body">
         <div class="table-responsive">
@@ -21,68 +44,73 @@
               <tr>
                 <th class="text-center">id</th>
                 <th class="text-center">name</th>
-                <th class="text-center">category</th>
+                <th class="text-center">#producto</th>
+                <th class="text-center">#categoria</th>
+                <th class="text-center">estado</th>
                 <th class="text-center">description</th>
                 <th class="text-center">precio</th>
                 <th class="text-center">cantidad</th>
-                <th class="text-center">inventario</th>
-                <th class="text-center">image</th>
+                <th class="text-center">Imagen</th>
                 <th class="text-center">created</th>
                 <th class="text-center">updated</th>
-                <th class="text-center">edit categorie</th>
+                <th class="text-center">edit order</th>
               </tr>
             </thead>
             <tbody>
-              @foreach ($orders as $order)
+            @foreach ($news as $pedido)
               <tr>                
                 <td class="text-center">
-                  {{ $order>id }}
+                  {{ $pedido->id }}
                 </td>
                 <td class="text-center">
-                  {{ $order>name}}
+                  {{ $pedido->name}}
                 </td>
                 <td class="text-center">
-                  {{ $order>categoryProd_id }}
+                  {{ $pedido->id_product }}
                 </td>
                 <td class="text-center">
-                  {{ $order>description }}
+                  {{ $pedido->categoryProd_id }}
                 </td>
                 <td class="text-center">
-                  {{ $order>precio }}
+                  {{ $pedido->estado }}
                 </td>
                 <td class="text-center">
-                  {{ $order>cantidad }}
+                  {{ $pedido->description }}
                 </td>
                 <td class="text-center">
-                  {{ $order>inventario }}
+                  {{ $pedido->precio }}
+                </td>
+                <td class="text-center">
+                  {{ $pedido->cantidad }}
                 </td>
                 <td class="text-center">                  
-                  <img src="{{ route('orderavatar',['filename'=>$order>image]) }}"/>                     
+                  <img src=""/>                     
                 </td>
                 <td class="text-center">
-                  {{ $order>created_at }}
+                  {{ $pedido->created_at }}
                 </td>
                 <td class="text-center">
-                  {{ $order>updated_at }}
+                  {{ $pedido->updated_at }}
                 </td>
                 <td class="text-center">
                   <form action="" method="POST">
                     @csrf
                       @method('')
                       <div class="card-footer">                       
-                        <a href="{{ url('/order/'.$order>id.'/edit') }}" class="btn btn-fill btn-primary">{{ __('Edit') }}</a>
+                        <a href="{{ url('/pedidos/'.$pedido->id.'/edit') }}" class="btn btn-fill btn-primary">{{ __('Edit') }}</a>
                       </div>
                   </form>
                 </td>
                </tr>
-               @endforeach            	 
+               @endforeach  
+          	 
             </tbody>
           </table>          
         </div>
         
         
           <ul class="pagination justify-content-center">
-            <li class="page-item" >{!! $orders->links() !!}</li>
+            <li class="page-item" ></li>            
           </ul>
        
      

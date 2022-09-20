@@ -126,7 +126,7 @@ class ProductController extends Controller
 
     public function getImage($filename)
     {
-      // obtener imagen avatar
+      // Obtener imagen de avatar
       $file = Storage::disk('imgproducts')->get($filename);
       return new Response($file, 200);
     }

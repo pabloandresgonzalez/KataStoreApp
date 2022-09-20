@@ -17,11 +17,13 @@ class CreatePedidosTable extends Migration
             $table->id();
 
             $table->string('name');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('id_product');
             $table->unsignedBigInteger('categoryProd_id');
+            $table->string('estado');
             $table->string('description');
             $table->integer('precio');
             $table->integer('cantidad');
-            $table->integer('inventario');
             $table->string('image')->nullable();
 
             $table->timestamps();

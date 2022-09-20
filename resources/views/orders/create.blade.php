@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-10">            
+        <div class="col-md-8">            
             <div class="card">                
                 <div class="card-header">
                     <h5 class="title">{{ __('New Order') }}</h5>
@@ -11,7 +11,7 @@
                   <div class="card-body">
 
 
-                    <form method="post" action="{{ route('storeproduct') }}" enctype="multipart/form-data" autocomplete="off">
+                    <form method="post" action="{{ route('storepedido') }}" enctype="multipart/form-data" autocomplete="off">
                         @csrf
 
                             
@@ -22,45 +22,53 @@
 
                         
 
-                          <div class="form-group">
-                              <label>{{ __('Category') }}</label>
-                              <select id="id" style="background-color: #1e1e2f;" name="categoryProd_id" class="form-control" >
-                                @foreach($categories as $user)
-                                  <option value="{{ $user->id }}"> {{ $user->id }} - {{ $user->name}}</option>
-                                @endforeach
-                              </select>                              
-                          </div>
-                 
+                        
+                        <div class="form-group{{ $errors->has('id') ? ' has-danger' : '' }}">
+                            <label>{{ __('Id') }}</label><br>
+                            <label>&nbsp;&nbsp;&nbsp; {{ $pedido->id }}</label>
+                            <input type="hidden" name="id_product" value="{{ $pedido->id }}" class="form-control{{ $errors->has('id') ? ' is-invalid' : '' }}" placeholder="{{ __('') }}" >
+                            @include('alerts.feedback', ['field' => 'id'])
+                        </div>
                         <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                             <label>{{ __('Name') }}</label>
-                            <input type="text" name="name" value="{{ old('name') }}" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" >
+                            <br>
+                            <label>&nbsp;&nbsp;&nbsp; {{ $pedido->name }}</label>
+                            <input type="hidden" name="name" value="{{ $pedido->name }}" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" >
                             @include('alerts.feedback', ['field' => 'name'])
                         </div>
+                        <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                            <label>{{ __('Category') }}</label><br>
+                            <label>&nbsp;&nbsp;&nbsp; {{ $pedido->categoryProd_id }}</label>
+                            <input type="hidden" name="categoryProd_id" value="{{ $pedido->categoryProd_id }}" class="form-control{{ $errors->has('categoryProd_id') ? ' is-invalid' : '' }}" placeholder="{{ __('') }}" >
+                            @include('alerts.feedback', ['field' => 'categoryProd_id'])
+                        </div>
+                        <div class="form-group{{ $errors->has('estado') ? ' has-danger' : '' }}">
+                            <input type="hidden" name="estado" value="Iniciado" class="form-control{{ $errors->has('estado   ') ? ' is-invalid' : '' }}" placeholder="{{ __('') }}" >
+                            @include('alerts.feedback', ['field' => 'estado'])
+                        </div>
                         <div class="form-group{{ $errors->has('description') ? ' has-danger' : '' }}">
-                            <label>{{ __('Description') }}</label>
-                            <input type="text" name="description" value="{{ old('description') }}" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" placeholder="{{ __('Description') }}" >
+                            <label>{{ __('Description') }}</label><br>
+                            <label>&nbsp;&nbsp;&nbsp; {{ $pedido->description }}</label>
+                            <input type="hidden" name="description" value="{{ $pedido->description }}" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" placeholder="{{ __('Description') }}" >
                             @include('alerts.feedback', ['field' => 'description'])
                         </div> 
                         <div class="form-group{{ $errors->has('precio') ? ' has-danger' : '' }}">
-                            <label>{{ __('Precio') }}</label>
-                            <input type="number" name="precio" class="form-control{{ $errors->has('precio') ? ' is-invalid' : '' }}" placeholder="{{ __('Precio') }}" name="precio" value="{{ old('precio') }}">
+                            <label>{{ __('Precio') }}</label><br>
+                            <label>&nbsp;&nbsp;&nbsp; {{ $pedido->precio }}</label>
+                            <input type="hidden" name="precio" class="form-control{{ $errors->has('precio') ? ' is-invalid' : '' }}" placeholder="{{ __('Precio') }}" name="precio" value="{{ $pedido->precio }}">
                             @include('alerts.feedback', ['field' => 'precio'])
                         </div>                                               
                         <div class="form-group{{ $errors->has('cantidad') ? ' has-danger' : '' }}">
-                            <label>{{ __('Cantidad') }}</label>
-                            <input type="number" name="cantidad" class="form-control{{ $errors->has('cantidad') ? ' is-invalid' : '' }}" placeholder="{{ __('cantidad') }}" name="cantidad" value="{{ old('cantidad') }}">
+                            <label>{{ __('Cantidad') }}</label><br>
+                            <input type="number" name="cantidad" class="form-control{{ $errors->has('cantidad') ? ' is-invalid' : '' }}" placeholder="{{ __('cantidad') }}" name="cantidad" value="">
                             @include('alerts.feedback', ['field' => 'cantidad'])
                         </div>
-                        <div class="form-group{{ $errors->has('inventario') ? ' has-danger' : '' }}">
-                            <label>{{ __('Inventory') }}</label>
-                            <input type="number" name="inventario" class="form-control{{ $errors->has('inventario') ? ' is-invalid' : '' }}" placeholder="{{ __('inventario') }}" name="inventario" value="{{ old('inventario') }}">
-                            @include('alerts.feedback', ['field' => 'inventario'])
-                        </div>
+
 
                         <div class="form-group{{ $errors->has('image') ? ' has-danger' : '' }}">
-                            <label>{{ __('Image') }}</label>
+
                             </div>
-                            <input class="form-control{{ $errors->has('image') ? ' is-invalid' : '' }}" placeholder="{{ __('image') }}"  type="file" name="image"  autocomplete="image" value="{{ old('image') }}">
+
                             @include('alerts.feedback', ['field' => 'image'])
                         </div>          
                                                                      
@@ -68,7 +76,48 @@
 
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-fill btn-primary">{{ __('Save') }}</button>
+                        <button href="storepedido" type="submit" class="btn btn-fill btn-primary">{{ __('Save') }}</button>
+                        <!-- Set up a container element for the button -->
+    <div id="paypal-button-container"></div>
+
+    <!-- Include the PayPal JavaScript SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id={{ env('PAYPAL_CLIENT_ID') }}&currency=USD"></script>
+
+    <script>
+
+        paypal.Buttons({
+
+            // Set up the transaction
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '50.00'
+                        }
+                    }]
+                });
+            },
+
+            // Finalize the transaction
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(orderData) {
+                    // Successful capture! For demo purposes:
+                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                    var transaction = orderData.purchase_units[0].payments.captures[0];
+                    alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+
+                    // Replace the above to show a success message within this page, e.g.
+                    // const element = document.getElementById('paypal-button-container');
+                    // element.innerHTML = '';
+                    // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                    // Or go to another URL:  actions.redirect('thank_you.html');
+                });
+            }
+
+
+        }).render('#paypal-button-container');
+
+    </script>
                     </div>
                 </form>
                   </div>
@@ -76,9 +125,36 @@
                 
             </div>
 
-            <div style="text-align: right;width;margin-right: 30px">
-              <a href="{{ route('products')  }}" class="btn btn-primary btn-link">to get back</a>
+            <div class="col-md-4">
+            <div class="card card-user">
+                <div class="card-body">
+                    <p class="card-text">
+                        <div class="author">
+                            <div class="block block-one"></div>
+                            <div class="block block-two"></div>
+                            <div class="block block-three"></div>
+                            <div class="block block-four"></div>
+                            <a href="#">
+                                <img src="{{ route('pedido.avatar',['filename'=>$pedido->image]) }}"/> 
+                                <br><br>
+                                <h5 class="title">{{ $pedido->name}}</h5>
+                            </a>
+                            <p class="description">
+                                {{ $pedido->description}}
+                            </p>
+                        </div>
+                    </p>
+                    <div class="card-description" style="text-align: center;">
+                        Codigo producto #  {{ $pedido->id}}
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div style="text-align: right;width;margin-right: 30px">
+              <a href="" class="btn btn-primary btn-link">to get back</a>
             </div>
+                </div>
+            </div>
+        </div>
             <br>
         </div>
 

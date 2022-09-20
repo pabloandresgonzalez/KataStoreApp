@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Admin Admin',
             'email' => 'pabloandres6@gmail.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('DashKata2021*'),
+            'password' => Hash::make('LKP2022*'),
             'created_at' => now(),
             'updated_at' => now()
         ]);

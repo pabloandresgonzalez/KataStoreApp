@@ -62,8 +62,8 @@
                                 <p>{{ __('Services') }}</p>
                             </a>
                         </li>
-                        <li @if ($pageSlug == 'orders') class="active " @endif>
-                            <a href="{{ route('orders') }}">
+                        <li @if ($pageSlug == 'pedidos') class="active " @endif>
+                            <a href="{{ route('pedidos') }}">
                                 <i class="tim-icons icon-puzzle-10"></i>
                                 <p>{{ __('Orders') }}</p>
                             </a>

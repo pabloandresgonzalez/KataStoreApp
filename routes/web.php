@@ -24,7 +24,7 @@ Route::get('/', function () {
 */
 
 
-Route::get('/', 'App\Http\Controllers\Controller@indexstore');
+Route::get('/', 'App\Http\Controllers\Controller@indexstore')->name('indexstore');
 Route::get('/avatar/{filename?}', [App\Http\Controllers\Controller::class, 'getImage'])->name('/.avatar');
 //Route::get('/welcome/avatar/{filename?}', 'App\Http\Controllers\Controller@getImage')->name('product.avatar');
 
@@ -82,12 +82,18 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/services', 'App\Http\Controllers\ServiceController@store')->name('storeservice'); 
 	Route::get('/services/avatar/{filename?}', [App\Http\Controllers\ServiceController::class, 'getImage'])->name('service.avatar');
 
-	Route::get('/orders', 'App\Http\Controllers\PedidoController@index')->name('orders');
-	Route::get('/orders/{order}/edit', 'App\Http\Controllers\PedidoController@edit')->name('editorder');
-	Route::put('/orders', [App\Http\Controllers\PedidoController::class, 'update']);
-	Route::get('/orders/create', [App\Http\Controllers\PedidoController::class, 'create'])->name('createorder'); 
-	Route::post('/orders', 'App\Http\Controllers\PedidoController@store')->name('storeorder'); 
-	Route::get('/orders/avatar/{filename?}', [App\Http\Controllers\PedidoController::class, 'getImage'])->name('order.avatar');
+	Route::get('/pedidos', 'App\Http\Controllers\PedidoController@index')->name('pedidos');
+	Route::get('/pedidos/{pedido?}/edit', 'App\Http\Controllers\PedidoController@edit')->name('editpedido');
+	Route::put('/pedidos', [App\Http\Controllers\PedidoController::class, 'update']);
+	Route::get('/pedidos/{product}/create', [App\Http\Controllers\PedidoController::class, 'create'])->name('createpedido'); 
+	Route::post('/pedidos', 'App\Http\Controllers\PedidoController@store')->name('storepedido'); 
+	Route::get('/pedidos/avatar/{filename?}', [App\Http\Controllers\PedidoController::class, 'getImage'])->name('pedido.avatar');
+	Route::get('/pedidos/misorders', [App\Http\Controllers\PedidoController::class, 'indexMisOrders'])->name('misorders');
+
+	//Route::get('/paypal/pay', 'PaymentController@payWithPayPal');
+	Route::get('/paypal/pay', [App\Http\Controllers\PaymentController::class, 'payWithPayPal']);
+	//Route::get('/paypal/status', 'PaymentController@payPalStatus');
+	Route::get('/paypal/status', [App\Http\Controllers\PaymentController::class, 'payPalStatus']);
 
 
 	
