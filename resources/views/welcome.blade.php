@@ -24,7 +24,7 @@
                     <div class="col-xl-4 col-lg-6">
                       
                       <div class="card" style="width: 15rem;">
-                        <img class="card-img-top" src="{{ route('/.avatar',['filename'=>$product->image]) }}" alt="Card image cap">
+                      <a href="{{ url('/products/'.$product->id.'/detail') }}" ><img class="card-img-top" src="{{ route('/.avatar',['filename'=>$product->image1]) }}" alt="Card image cap"></a>
                         <div class="card-body" style="text-align: center;">
                           <h3 class="card-title"></h3> 
                           <span> <p class="card-text">
@@ -39,7 +39,7 @@
                     @endforeach
 
 
-                     @foreach($products as $product)                    
+                    @foreach($products as $product)                    
                     <div class="modal show" tabindex="-1" role="dialog" id="modal-form1{{ $loop->iteration }}">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">

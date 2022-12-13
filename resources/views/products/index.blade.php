@@ -25,7 +25,6 @@
                 <th class="text-center">description</th>
                 <th class="text-center">precio</th>
                 <th class="text-center">cantidad</th>
-                <th class="text-center">inventario</th>
                 <th class="text-center">image</th>
                 <th class="text-center">created</th>
                 <th class="text-center">updated</th>
@@ -53,11 +52,8 @@
                 <td class="text-center">
                   {{ $product->cantidad }}
                 </td>
-                <td class="text-center">
-                  {{ $product->inventario }}
-                </td>
                 <td class="text-center">                  
-                  <img src="{{ route('product.avatar',['filename'=>$product->image]) }}"/>                     
+                  <img src="{{ route('product.avatar',['filename'=>$product->image1]) }}"/>                     
                 </td>
                 <td class="text-center">
                   {{ $product->created_at }}

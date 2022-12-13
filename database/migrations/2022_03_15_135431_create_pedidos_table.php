@@ -22,9 +22,13 @@ class CreatePedidosTable extends Migration
             $table->unsignedBigInteger('categoryProd_id');
             $table->string('estado');
             $table->string('description');
+            $table->string('address');
             $table->integer('precio');
-            $table->integer('cantidad');
+            $table->string('phone');
+            $table->string('cantidad');
             $table->string('image')->nullable();
+            $table->string('observation')->nullable();
+            $table->integer('total');
 
             $table->timestamps();
         });

@@ -24,18 +24,19 @@
         <a href="{{ route('createproduct')  }}" class="btn btn-primary btn-link">New order</a>
       </div>
 
-      <!-- Form -->
+      <!-- 
       <form class="">
         <div class="form-group mb-0">
           <div class="input-group input-group-alternative">
             <div class="input-group-prepend">
               <span class="input-group-text thead-dark"><i class="fas fa-search"></i></span>
             </div>
-            <input name="buscarpor" class="form-control" placeholder="Buscar" type="text">
-              <!-- <button class="btn btn-secondary btn-sm" type="submit">Buscar</button> -->
+            <input name="buscarpor" class="form-control" placeholder="Buscar" type="text" >
+              <button class="btn btn-secondary btn-sm" type="submit" id="boton">Buscar</button>
             </div>
         </div>
       </form>
+      Form -->
 
       <div class="card-body">
         <div class="table-responsive">
@@ -44,20 +45,19 @@
               <tr>
                 <th class="text-center">id</th>
                 <th class="text-center">name</th>
-                <th class="text-center">#producto</th>
-                <th class="text-center">#categoria</th>
-                <th class="text-center">estado</th>
+                <th class="text-center">#Product</th>
+                <th class="text-center">condition</th>
                 <th class="text-center">description</th>
-                <th class="text-center">precio</th>
-                <th class="text-center">cantidad</th>
-                <th class="text-center">Imagen</th>
+                <th class="text-center">price</th>
+                <th class="text-center">amount</th>
+                <th class="text-center">observation</th>
+                <th class="text-center">total</th>
+                <th class="text-center">proof of payment</th>
                 <th class="text-center">created</th>
-                <th class="text-center">updated</th>
-                <th class="text-center">edit order</th>
               </tr>
             </thead>
             <tbody>
-            @foreach ($news as $pedido)
+            @foreach ($pedidos as $pedido) 
               <tr>                
                 <td class="text-center">
                   {{ $pedido->id }}
@@ -67,9 +67,6 @@
                 </td>
                 <td class="text-center">
                   {{ $pedido->id_product }}
-                </td>
-                <td class="text-center">
-                  {{ $pedido->categoryProd_id }}
                 </td>
                 <td class="text-center">
                   {{ $pedido->estado }}
@@ -83,23 +80,17 @@
                 <td class="text-center">
                   {{ $pedido->cantidad }}
                 </td>
+                <td class="text-center">
+                  {{ $pedido->observacion }}
+                </td>
+                <td class="text-center">
+                  {{ $pedido->total }}
+                </td>
                 <td class="text-center">                  
-                  <img src=""/>                     
+                  <img src="{{ route('pedido.avatar',['filename'=>$pedido->image]) }}"/>                    
                 </td>
                 <td class="text-center">
                   {{ $pedido->created_at }}
-                </td>
-                <td class="text-center">
-                  {{ $pedido->updated_at }}
-                </td>
-                <td class="text-center">
-                  <form action="" method="POST">
-                    @csrf
-                      @method('')
-                      <div class="card-footer">                       
-                        <a href="{{ url('/pedidos/'.$pedido->id.'/edit') }}" class="btn btn-fill btn-primary">{{ __('Edit') }}</a>
-                      </div>
-                  </form>
                 </td>
                </tr>
                @endforeach  
@@ -110,7 +101,7 @@
         
         
           <ul class="pagination justify-content-center">
-            <li class="page-item" ></li>            
+            {{ $pedidos->appends(request()->input())->links() }}          
           </ul>
        
      

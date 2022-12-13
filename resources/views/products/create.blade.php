@@ -51,17 +51,37 @@
                             <input type="number" name="cantidad" class="form-control{{ $errors->has('cantidad') ? ' is-invalid' : '' }}" placeholder="{{ __('cantidad') }}" name="cantidad" value="{{ old('cantidad') }}">
                             @include('alerts.feedback', ['field' => 'cantidad'])
                         </div>
-                        <div class="form-group{{ $errors->has('inventario') ? ' has-danger' : '' }}">
-                            <label>{{ __('Inventory') }}</label>
-                            <input type="number" name="inventario" class="form-control{{ $errors->has('inventario') ? ' is-invalid' : '' }}" placeholder="{{ __('inventario') }}" name="inventario" value="{{ old('inventario') }}">
-                            @include('alerts.feedback', ['field' => 'inventario'])
+
+                        <div>
+                        <div class="form-group{{ $errors->has('image1') ? ' has-danger' : '' }}">
+                            <label>{{ __('Image 1') }}</label>
+                            </div>
+                            <input class="form-control{{ $errors->has('image1') ? ' is-invalid' : '' }}" placeholder="{{ __('image1') }}" type="file" name="image1"  autocomplete="image1" value="{{ old('image1') }}">
+                            @include('alerts.feedback', ['field' => 'image1'])<br>
+
+                            <label>{{ __('Image 2') }}</label>
+                            </div>
+                            <input class="form-control{{ $errors->has('image2') ? ' is-invalid' : '' }}" placeholder="{{ __('image2') }}" type="file" name="image2"  autocomplete="image2" value="{{ old('image2') }}">
+                            @include('alerts.feedback', ['field' => 'image2'])<br>
+
+                            <div>
+                        <div class="form-group{{ $errors->has('image3') ? ' has-danger' : '' }}">
+                            <label>{{ __('Image 3') }}</label>
+                            </div>
+                            <input class="form-control{{ $errors->has('image3') ? ' is-invalid' : '' }}" placeholder="{{ __('image3') }}" type="file" name="image3"  autocomplete="image3" value="{{ old('image3') }}">
+                            @include('alerts.feedback', ['field' => 'image3'])<br>
+
+                            <label>{{ __('Image 4') }}</label>
+                            </div>
+                            <input class="form-control{{ $errors->has('image4') ? ' is-invalid' : '' }}" placeholder="{{ __('image4') }}" type="file" name="image4"  autocomplete="image4" value="{{ old('image4') }}">
+                            @include('alerts.feedback', ['field' => 'image4'])
+                        
                         </div>
 
-                        <div class="form-group{{ $errors->has('image') ? ' has-danger' : '' }}">
-                            <label>{{ __('Image') }}</label>
-                            </div>
-                            <input class="form-control{{ $errors->has('image') ? ' is-invalid' : '' }}" placeholder="{{ __('image') }}"  type="file" name="image"  autocomplete="image" value="{{ old('image') }}">
-                            @include('alerts.feedback', ['field' => 'image'])
+
+
+
+
                         </div>          
                                                                      
 

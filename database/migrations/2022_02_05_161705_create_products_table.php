@@ -22,8 +22,10 @@ class CreateProductsTable extends Migration
             $table->string('description');
             $table->integer('precio');
             $table->integer('cantidad');
-            $table->integer('inventario');
-            $table->string('image')->nullable();
+            $table->string('image1')->nullable();
+            $table->string('image2')->nullable();
+            $table->string('image3')->nullable();
+            $table->string('image4')->nullable();
             
             $table->timestamps();
         });

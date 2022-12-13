@@ -35,13 +35,13 @@ Route::get('/discount', function(){
 Route::get('/generate-signature', [DiscountController::class, 'discount']);
 //Route::get('/generate-signature', 'App\Http\Controllers\DiscountController@discount');
 
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Auth::routes();
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
-
 
 
 Route::group(['middleware' => 'auth'], function () {
@@ -69,7 +69,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/categories', [App\Http\Controllers\CategoryController::class, 'store'])->name('storecategory');
 
 	Route::get('/products', 'App\Http\Controllers\ProductController@index')->name('products');
-	Route::get('/products/{product}/edit', 'App\Http\Controllers\ProductController@edit')->name('editproduct');
+	Route::get('/products/{product}/edit', 'App\Http\Controllers\ProductController@edit')->name('editproduct');	
+	Route::get('/products/{product}/detail', 'App\Http\Controllers\ProductController@detail')->name('detailproduct');
 	Route::put('/products', [App\Http\Controllers\ProductController::class, 'update']);
 	Route::get('/products/create', [App\Http\Controllers\ProductController::class, 'create'])->name('createproduct'); 
 	Route::post('/products', 'App\Http\Controllers\ProductController@store')->name('storeproduct'); 

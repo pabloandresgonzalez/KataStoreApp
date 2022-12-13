@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use DB;
 
 class ProductController extends Controller
 {
@@ -38,8 +39,10 @@ class ProductController extends Controller
           //'categoryProd_id' => 'required|string|min:4|max:255',
           'precio' => 'required|numeric',
           'cantidad' => 'required|numeric',
-          'inventario' => 'required|numeric',
-          'image' => 'file',
+          'image1' => 'file',
+          'image2' => 'file',
+          'image3' => 'file',
+          'image4' => 'file',
 
         ]);
 
@@ -49,21 +52,50 @@ class ProductController extends Controller
         $categorie->categoryProd_id = $request->input('categoryProd_id');
         $categorie->precio = $request->input('precio');
         $categorie->cantidad = $request->input('cantidad');
-        $categorie->inventario = $request->input('inventario');
 
-        //Subir la imagen photo
-        $image_photo = $request->file('image');
-        if ($image_photo) {
+        /*
+        //Subir la imagen photo1
+        $image_photo1 = $request->file('image1');
+        if ($image_photo1) {
+
+          //Poner nombre unico
+          $image_photo_name1 = time() . $image_photo1->getClientOriginalName();
+
+          //Guardarla en la carpeta storage (storage/app/users)
+          Storage::disk('imgproducts')->put($image_photo_name1, File::get($image_photo1));
+
+          //Seteo el nombre de la imagen en el objeto
+          $categorie->image1 = $image_photo_name1;
+        }
+        */
+
+        //Subir la imagen photo2
+        $image_photo = $request->file('image1');
+        $image_photo2 = $request->file('image2');
+        $image_photo3 = $request->file('image3');
+        $image_photo4 = $request->file('image4');
+        if ($image_photo || $image_photo2 || $image_photo3 || $image_photo4) {
 
           //Poner nombre unico
           $image_photo_name = time() . $image_photo->getClientOriginalName();
+          $image_photo_name2 = time() . $image_photo2->getClientOriginalName();
+          $image_photo_name3 = time() . $image_photo3->getClientOriginalName();
+          $image_photo_name4 = time() . $image_photo4->getClientOriginalName();
 
           //Guardarla en la carpeta storage (storage/app/users)
           Storage::disk('imgproducts')->put($image_photo_name, File::get($image_photo));
+          Storage::disk('imgproducts')->put($image_photo_name2, File::get($image_photo2));
+          Storage::disk('imgproducts')->put($image_photo_name3, File::get($image_photo3));
+          Storage::disk('imgproducts')->put($image_photo_name4, File::get($image_photo4));
 
           //Seteo el nombre de la imagen en el objeto
-          $categorie->image = $image_photo_name;
+          $categorie->image1 = $image_photo_name;
+          $categorie->image2 = $image_photo_name2;
+          $categorie->image3 = $image_photo_name3;
+          $categorie->image4 = $image_photo_name4;
         }
+
+        
 
 
         $categorie->save();
@@ -80,6 +112,31 @@ class ProductController extends Controller
       return view('products.edit', ['product' => $product, 'categories' => $categories]);
     }
 
+    public function detail($id)
+    {
+
+      $product = Product::find($id);
+      $idcategoria = $product->categoryProd_id;
+
+      //dd($product);
+      $product = Product::find($id);
+
+      //  
+      $category = DB::table("categories")
+      ->where('id', $idcategoria)    
+      ->get();
+
+      //dd($category);
+
+      //$categories = Category::find($id);
+
+
+      return view('products.detail', [
+        'product' => $product,
+        'category'=> $category,
+      ]);
+    }
+
     public function update(Request $request)
     {    
 
@@ -91,7 +148,6 @@ class ProductController extends Controller
           //'categoryProd_id' => 'required|string|min:4|max:255',
           'precio' => 'required|numeric',
           'cantidad' => 'required|numeric',
-          'inventario' => 'required|numeric',
           'image' => 'file',
 
       ]);
@@ -102,8 +158,8 @@ class ProductController extends Controller
         $categorie->categoryProd_id = $request->input('categoryProd_id');
         $categorie->precio = $request->input('precio');
         $categorie->cantidad = $request->input('cantidad');
-        $categorie->inventario = $request->input('inventario');
 
+        /*
         //Subir la imagen photo
         $image_photo = $request->file('image');
         if ($image_photo) {
@@ -116,6 +172,33 @@ class ProductController extends Controller
 
           //Seteo el nombre de la imagen en el objeto
           $categorie->image = $image_photo_name;
+        }
+        */
+
+        //Subir la imagen photo2
+        $image_photo = $request->file('image1');
+        $image_photo2 = $request->file('image2');
+        $image_photo3 = $request->file('image3');
+        $image_photo4 = $request->file('image4');
+        if ($image_photo || $image_photo2 || $image_photo3 || $image_photo4) {
+
+          //Poner nombre unico
+          $image_photo_name = time() . $image_photo->getClientOriginalName();
+          $image_photo_name2 = time() . $image_photo2->getClientOriginalName();
+          $image_photo_name3 = time() . $image_photo3->getClientOriginalName();
+          $image_photo_name4 = time() . $image_photo4->getClientOriginalName();
+
+          //Guardarla en la carpeta storage (storage/app/users)
+          Storage::disk('imgproducts')->put($image_photo_name, File::get($image_photo));
+          Storage::disk('imgproducts')->put($image_photo_name2, File::get($image_photo2));
+          Storage::disk('imgproducts')->put($image_photo_name3, File::get($image_photo3));
+          Storage::disk('imgproducts')->put($image_photo_name4, File::get($image_photo4));
+
+          //Seteo el nombre de la imagen en el objeto
+          $categorie->image = $image_photo_name;
+          $categorie->image2 = $image_photo_name2;
+          $categorie->image3 = $image_photo_name3;
+          $categorie->image4 = $image_photo_name4;
         }
 
         $categorie->save();

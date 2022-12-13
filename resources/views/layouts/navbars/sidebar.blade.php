@@ -13,28 +13,29 @@
             </li>
             <li>
                 <a data-toggle="collapse" href="#user" aria-expanded="true">
-                    <i class="tim-icons icon-satisfied" ></i>
+                    <i class="tim-icons icon-badge" ></i>
                     <span class="nav-link-text" >{{ __('Manage users') }}</span>
                     <b class="caret mt-1"></b>
                 </a>
 
-                <div class="collapse show" id="user">
+                <div class="collapse " id="user">
                     <ul class="nav pl-4">
                         <li @if ($pageSlug == 'profile') class="active " @endif>
-                            <a href="{{ route('profile.edit')  }}">
+                            <a href="{{ route('profile.edit') }}">
                                 <i class="tim-icons icon-single-02"></i>
                                 <p>{{ __('User Profile') }}</p>
                             </a>
                         </li>
                         <li @if ($pageSlug == 'users') class="active " @endif>
-                            <a href="{{ route('homeusers')  }}">
+                            <a href="{{ route('homeusers') }}">
                                 <i class="tim-icons icon-bullet-list-67"></i>
                                 <p>{{ __('User Management') }}</p>
                             </a>
                         </li>
+                        
                     </ul>
                 </div>
-            </li>
+            </li>            
             <li>
                 <a data-toggle="collapse" href="#prod" aria-expanded="true">
                     <i class="tim-icons icon-satisfied" ></i>
@@ -62,6 +63,12 @@
                                 <p>{{ __('Services') }}</p>
                             </a>
                         </li>
+                        <li @if ($pageSlug == 'misorders') class="active " @endif>
+                            <a href="{{ route('misorders') }}">
+                                <i class="tim-icons icon-puzzle-10"></i>
+                                <p>{{ __('Mis Orders') }}</p>
+                            </a>
+                        </li>
                         <li @if ($pageSlug == 'pedidos') class="active " @endif>
                             <a href="{{ route('pedidos') }}">
                                 <i class="tim-icons icon-puzzle-10"></i>
@@ -70,7 +77,7 @@
                         </li>
                     </ul>
                 </div>
-            </li>
+            </li>            
             <li @if ($pageSlug == 'icons') class="active " @endif>
                 <a href="{{ route('pages.icons') }}">
                     <i class="tim-icons icon-atom"></i>

@@ -44,12 +44,14 @@
               <tr>
                 <th class="text-center">id</th>
                 <th class="text-center">name</th>
-                <th class="text-center">#producto</th>
-                <th class="text-center">#categoria</th>
+                <th class="text-center">product</th>
+                <th class="text-center">categoria</th>
                 <th class="text-center">estado</th>
                 <th class="text-center">description</th>
                 <th class="text-center">precio</th>
                 <th class="text-center">cantidad</th>
+                <th class="text-center">observacion</th>
+                <th class="text-center">total</th>
                 <th class="text-center">Imagen</th>
                 <th class="text-center">created</th>
                 <th class="text-center">updated</th>
@@ -82,6 +84,12 @@
                 </td>
                 <td class="text-center">
                   {{ $pedido->cantidad }}
+                </td>
+                <td class="text-center">
+                  {{ $pedido->observacion }}
+                </td>
+                <td class="text-center">
+                  {{ $pedido->total }}
                 </td>
                 <td class="text-center">                  
                   <img src=""/>                     

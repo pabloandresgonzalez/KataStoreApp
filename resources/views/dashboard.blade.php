@@ -379,5 +379,5 @@
         $(document).ready(function() {
           demo.initDashboardPageCharts();
         });
-    </script>
+    </script>    
 @endpush

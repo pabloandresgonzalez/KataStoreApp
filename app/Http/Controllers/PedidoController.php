@@ -40,14 +40,17 @@ class PedidoController extends Controller
 	}
 
 	public function create($id)
-	{
+	{	
+		//dd($id);
 		//Conseguir usuario identificado
       	$user = \Auth::user(); 
       	$name = $user->name;
 
-		$pedido = Product::find($id);
+		//$pedido = Product::find($id);
+		$product = Product::find($id);
+		$id_product = $id;
 		
-		return view('orders.create', compact('pedido', 'name'));		
+		return view('orders.create', compact('name', 'product', 'id_product'));		
 	}
 
 	public function edit($id)
@@ -61,33 +64,64 @@ class PedidoController extends Controller
 
 	public function store(Request $request)
 	{
+		//dd($request);
 		//Conseguir usuario identificado
       	$user = \Auth::user(); 
       	$userid = $user->id;
 
-		//dd($request);
+
+
 		$validate = $this->validate($request, [
+		  		'id' =>'string',
           'name' => 'required|string|min:4|max:255',
           'description' => 'required|string|min:10|max:255',
           'estado' => 'required|string|min:4|max:255',
+          'address' => 'required|string|min:4|max:255',
           'precio' => 'required|numeric',
-          'cantidad' => 'required|numeric'
+          'phone' => 'required|numeric',
+          'cantidad' => 'required|numeric',
+          'observation' => 'string|min:10|max:255',
+          'image' => 'file'
         ]);
 
+
         $pedido = new Pedido();
-        $pedido->id_product = $request->input('id_product');
+        $pedido->id_product = $request->input('id');
         $pedido->name = $request->input('name');
         $pedido->user_id = $userid;
         $pedido->categoryProd_id = $request->input('categoryProd_id');
         $pedido->estado = $request->input('estado');
         $pedido->description = $request->input('description');
         $pedido->precio = $request->input('precio');
-        $pedido->cantidad = $request->input('cantidad');  
+        $pedido->address = $request->input('address');
+        $pedido->phone = $request->input('phone');
+        $pedido->cantidad = $request->input('cantidad');
+        $precio = $request->input('precio');
+        $cantidad = $request->input('cantidad'); 
+        $total = $precio * $cantidad;
 
+        $pedido->total = $total;
 
+        $pedido->observation = $request->input('observation');  
+
+        //Subir la imagen
+        $image_photo1 = $request->file('image');
+        if ($image_photo1) {
+
+          //Poner nombre unico
+          $image_photo_name1 = time() . $image_photo1->getClientOriginalName();
+
+          //Guardarla en la carpeta storage (storage/app/users)
+          Storage::disk('imgorders')->put($image_photo_name1, File::get($image_photo1));
+
+          //Seteo el nombre de la imagen en el objeto
+          $pedido->image = $image_photo_name1;
+        }      
+        
         $pedido->save();  
 
-        $news = Pedido::all();
+
+        $news = Pedido::where('user_id', $user->id)->get();
 
         //return view('orders.index');
         /*
@@ -115,17 +149,18 @@ class PedidoController extends Controller
 
 	public function indexMisOrders(Request $request)
 	{
-
 		//Conseguir usuario identificado
-      	$user = \Auth::user();      	
+      $user = \Auth::user();   
 
-      	$news = Pedido::where('user_id', $user->id)->get();
+    $pedidos = Pedido::where('user_id', $user->id)
+    ->orderBy('created_at', 'desc')
+    ->paginate(30);
 
-		$nombre = $request->get('buscarpor');
-
+    $nombre = $request->get('buscarpor');
+      
 		/*
 		// Buscador
-		$news = Pedido::where('name', 'LIKE', "%$nombre%")
+		$pedidos = Pedido::where('name', 'LIKE', "%$nombre%")
 		->orwhere('id', 'LIKE', "%$nombre%")
 		->orwhere('id_product', 'LIKE', "%$nombre%")
 		->orwhere('categoryProd_id', 'LIKE', "%$nombre%")
@@ -133,12 +168,20 @@ class PedidoController extends Controller
 		->orwhere('description', 'LIKE', "%$nombre%")
 		->orwhere('precio', 'LIKE', "%$nombre%")
 		->orderBy('created_at', 'desc')
-		->paginate(50);
-		*/
+		->paginate(30);*/
+		
+		
 
-	    return view('orders.misorders', compact('news'));
+	    return view('orders.misorders', compact('pedidos'));
 		//return view('orders.index', ['pedido' => $model->paginate(15)]);
 	}
+
+	public function getImage($filename)
+    {
+      // Obtener imagen de avatar
+      $file = Storage::disk('imgorders')->get($filename);
+      return new Response($file, 200);
+    }
 
 
 
