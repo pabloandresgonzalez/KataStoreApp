@@ -8,7 +8,7 @@
                     <div class="col-lg-5 col-md-6">
                         <h1 class="text-white">{{ __('Kata Store') }}</h1>
                         <h3 class="text-lead text-light">
-                            {{ __('Hello, welcome to the best page you can buy online!') }}
+                            {{ __('Hello, look at the products you can buy in our store, welcome!') }}
                         </h3>
 
                     </div>
@@ -58,8 +58,8 @@
                                   <td class="storetr">Precio:</td>
                                     <td>{{ $product->precio }}</td>
                                   </tr>
-                                    <td class="storetr">Total:</td>
-                                    <td>{{ $product->precio }}</td>
+                                    <td class="storetr">Código:</td>
+                                    <td>{{ $product->id }}</td>                                    
                                   <tr>                                                                   
                                 </tbody>
                               </table>

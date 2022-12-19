@@ -5,13 +5,13 @@
         <div class="col-md-8">            
             <div class="card">                
                 <div class="card-header">
-                    <h5 class="title">{{ __('New Order') }}</h5>
+                    <h5 class="title">{{ __('Cambiar el estado del pedido') }}</h5>
                 </div> 
                 <div class="card">
                   <div class="card-body">
 
 
-                    <form method="post" action="{{ route('products') }}" enctype="multipart/form-data" autocomplete="off">
+                    <form method="post" action="{{ route('pedidos') }}" enctype="multipart/form-data" autocomplete="off">
 
                     <div class="card-body">  
                         @csrf
@@ -19,39 +19,40 @@
 
                         @include('alerts.success')
 
-                        
+                        <input type="hidden" value="{{$pedido->id}}" name="id">
 
-                 
-                        <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
-                            <label>{{ __('Name') }}</label>
-                            <input type="text" name="name" value="{{ $pedido->name }}" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" >
-                            @include('alerts.feedback', ['field' => 'name'])
-                        </div>
-                        <div class="form-group{{ $errors->has('description') ? ' has-danger' : '' }}">
-                            <label>{{ __('Description') }}</label>
-                            <input type="text" name="description" value="{{ $pedido->description }}" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" placeholder="{{ __('Description') }}" >
+                        Pedido  <label>&nbsp; {{ $pedido->id }}</label><br>
+                        Product  <label>&nbsp; {{ $pedido->id_product }}</label><br>
+                        Name <label>&nbsp; {{ $pedido->name }}</label><br>                        
+                        Precio x Und. <label>&nbsp; {{ $pedido->precio }}</label><br>
+                        Cantidad <label>&nbsp; {{ $pedido->cantidad }}</label><br>
+                        Valor total del pedido <label>&nbsp; {{ $pedido->cantidad * $pedido->precio }}</label><br>
+                        Descripción <label>&nbsp; {{ $pedido->description }}</label><br>  
+                        <hr>                      
+
+                        <div class="form-group{{ $errors->has('estado') ? ' has-danger' : '' }}">   
+                            <label>{{ __('Estado') }}</label>                         
+                            @if($pedido->estado === 'Cerrado')                                
+                                <label>&nbsp; <strong> {{ $pedido->estado }} </strong>, ya no es &nbsp;posible hacer mas cambios al estado del pedido&nbsp; &nbsp; </label>
+                                  @else
+                            <select style="background-color:#1e1e2f" id="estado" name="estado" class="form-control" required>
+                              <option value="{{ $pedido->estado }}">Estado actual {{ $pedido->estado }}</option>
+                              <option value="Activo"  >Activo</option>
+                              <option value="Cerrado"  >Cerrado</option>
+                            </select>
                             @include('alerts.feedback', ['field' => 'description'])
-                        </div> 
-                        <div class="form-group{{ $errors->has('precio') ? ' has-danger' : '' }}">
-                            <label>{{ __('Precio') }}</label>
-                            <input type="number" name="precio" class="form-control{{ $errors->has('precio') ? ' is-invalid' : '' }}" placeholder="{{ __('Precio') }}" name="precio" value="{{ $pedido->precio }}">
-                            @include('alerts.feedback', ['field' => 'precio'])
-                        </div>                                               
-                        <div class="form-group{{ $errors->has('cantidad') ? ' has-danger' : '' }}">
-                            <label>{{ __('Cantidad') }}</label>
-                            <input type="number" name="cantidad" class="form-control{{ $errors->has('cantidad') ? ' is-invalid' : '' }}" placeholder="" name="cantidad" value="">
-                            @include('alerts.feedback', ['field' => 'cantidad'])
+                            @endif
                         </div>
-
-
-                        </div>         
-                                                                     
-
-
+                        <?php
+                        if ($pedido->estado === 'Cerrado') {
+                          echo '';
+                        } else {
+                          echo '<button type="submit" class="btn btn-fill btn-primary">Save</button>';
+                        }
+                        ?>                        
                     </div>
-                    <div class="card-footer">
-                        <button href="" type="submit" class="btn btn-fill btn-primary">{{ __('Save') }}</button>
-                    </div>
+                 </div>
+                    
                 </form>
                   </div>
                 </div>               
@@ -68,7 +69,7 @@
                             <div class="block block-three"></div>
                             <div class="block block-four"></div>
                             <a href="#">
-                                <img src="{{ route('pedido.avatar',['filename'=>$pedido->image]) }}"/> 
+                                <img style="width:100px; height:200px" src="{{ route('pedido.avatar',['filename'=>$pedido->image]) }}"/> 
                                 <br><br>
                                 <h5 class="title">{{ $pedido->name}}</h5>
                             </a>

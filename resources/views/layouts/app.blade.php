@@ -20,13 +20,31 @@
         <link href="{{ asset('black') }}/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
         <link href="{{ asset('black') }}/css/theme.css" rel="stylesheet" />
         <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function() {
-          setTimeout(function() {
-              $(".alert").fadeOut(20000);
+        <script type="text/javascript">
+          $(document).ready(function() {
+              setTimeout(function() {
+                  $(".alert").fadeOut(40000);
+              });
           });
-      });
-    </script>
+        </script>
+        <script type="text/javascript">
+            function Desactivar(){
+                document.getElementById('miText').readOnly = true;
+            }
+        </script>
+        <script>
+            try {function calculate() {
+                var myBox1 = document.getElementById('box1').value; 
+                var myBox2 = document.getElementById('box2').value;
+                var result = document.getElementById('result'); 
+                var myResult = '$ ' + myBox1 * myBox2 +' .00';
+                result.value = myResult;
+
+
+                }
+            } catch (error) { throw error; }
+        </script>
+
     </head>
     <body class="{{ $class ?? '' }}">
         @auth()

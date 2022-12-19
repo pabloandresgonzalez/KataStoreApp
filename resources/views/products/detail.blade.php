@@ -64,11 +64,11 @@
                     <p class="card-text">
                         <div class="author">
                                 @foreach ($category as $categorys)
-                                Categoria: <strong>{{ $categorys->name}}</strong> <br><br>
+                                Categoria: <strong>{{ $categorys->name }}</strong> <br><br>
                                 @endforeach                                
-                                Vendidos: <strong>{{ $product->cantidad}}</strong><br><br>
-                                Disponibles <strong>{{ $product->cantidad}}</strong><br><br>
-                                Codigo del producto: <strong>{{ $product->id}}</strong><br><br>
+                                Solicitados: <strong>{{ $tolProVend }}</strong><br><br>
+                                Disponibles <strong>{{ $product->cantidad - $tolProVend }}</strong><br><br>
+                                Codigo del producto: <strong>{{ $product->id }}</strong><br><br>
                             
                         </div>
                     </p>

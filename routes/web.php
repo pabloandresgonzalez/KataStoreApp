@@ -85,7 +85,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('/pedidos', 'App\Http\Controllers\PedidoController@index')->name('pedidos');
 	Route::get('/pedidos/{pedido?}/edit', 'App\Http\Controllers\PedidoController@edit')->name('editpedido');
-	Route::put('/pedidos', [App\Http\Controllers\PedidoController::class, 'update']);
+	Route::put('/pedidos{pedido?}', [App\Http\Controllers\PedidoController::class, 'update']);
 	Route::get('/pedidos/{product}/create', [App\Http\Controllers\PedidoController::class, 'create'])->name('createpedido'); 
 	Route::post('/pedidos', 'App\Http\Controllers\PedidoController@store')->name('storepedido'); 
 	Route::get('/pedidos/avatar/{filename?}', [App\Http\Controllers\PedidoController::class, 'getImage'])->name('pedido.avatar');

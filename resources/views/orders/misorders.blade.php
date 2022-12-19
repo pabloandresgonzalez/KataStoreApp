@@ -21,7 +21,8 @@
       @endif
 
       <div>
-        <a href="{{ route('createproduct')  }}" class="btn btn-primary btn-link">New order</a>
+        <a href="{{ route('home') }}" class="btn btn-primary btn-link">Dashboard</a>
+        <p>Total de mis compras realizadas ${{ $totalGasto  }}</p>
       </div>
 
       <!-- 
@@ -40,7 +41,7 @@
 
       <div class="card-body">
         <div class="table-responsive">
-          <table class="table tablesorter " id="">
+          <table class="table tablesorter ">
             <thead class=" text-primary">
               <tr>
                 <th class="text-center">id</th>
