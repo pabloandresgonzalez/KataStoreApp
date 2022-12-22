@@ -54,7 +54,12 @@
                  </div>
                     
                 </form>
-                  </div>
+                <div class="card-footer">
+                    <div style="text-align: right;width;margin-right: 30px">
+                        <a href="{{ route('pedidos') }}" class="btn btn-primary btn-link">to get back</a>
+                    </div>
+                </div>
+                  </div>                  
                 </div>               
                 
             </div>
@@ -84,8 +89,8 @@
                 </div>
                 <div class="card-footer">
                     <div style="text-align: right;width;margin-right: 30px">
-              <a href="" class="btn btn-primary btn-link">to get back</a>
-            </div>
+                        <a href="{{ route('pedidos') }}" class="btn btn-primary btn-link">to get back</a>
+                    </div>
                 </div>
             </div>
         </div>

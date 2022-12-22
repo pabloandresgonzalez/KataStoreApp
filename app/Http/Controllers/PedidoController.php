@@ -35,10 +35,12 @@ class PedidoController extends Controller
 		->orwhere('description', 'LIKE', "%$nombre%")
 		->orwhere('precio', 'LIKE', "%$nombre%")
 		->orderBy('created_at', 'desc')
-		->paginate(100);
+		->paginate(40);
+
+    $tolOrders = Pedido::all()->count('id');
 
 
-	    return view('orders.index', compact('news'));
+	    return view('orders.index', compact('news', 'tolOrders'));
 
 	}
 
@@ -46,8 +48,8 @@ class PedidoController extends Controller
 	{	
 		//dd($id);
 		//Conseguir usuario identificado
-      	$user = \Auth::user(); 
-      	$name = $user->name;
+  	$user = \Auth::user(); 
+  	$name = $user->name;
 
 		//$pedido = Product::find($id);
 		$product = Product::find($id);
@@ -140,7 +142,8 @@ class PedidoController extends Controller
     return redirect()->route('misorders')->with([
         'message' => $message,
         'news' => $news,
-        'user' => $user
+        'user' => $user,
+        'pedido' => $pedido
     ]);     
     
 	}

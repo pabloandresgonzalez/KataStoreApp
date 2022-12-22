@@ -31,10 +31,9 @@
                           {{ $product->name }}<br></p></span><br>
                           <h4 class="card-title">{{ $product->description }}</h4>
                           <h5 class="card-title">$ {{ $product->precio }}</h5>               
-                          <a data-toggle="modal"  data-target="#modal-form1{{ $loop->iteration }}" href="#modal-form1{{ $loop->iteration }}" class="badge badge-warning"><i class="ni ni-cart" ></i>&nbsp; Comprar</a>
+                          <a data-toggle="modal"  data-target="#modal-form1{{ $loop->iteration }}" href="#modal-form1{{ $loop->iteration }}" class="btn btn-fill btn-warning"><i class="ni ni-cart" ></i>&nbsp; Comprar</a>
                         </div>
                         </div>
-                        <hr>   
                     </div>
                     @endforeach
 
@@ -44,26 +43,27 @@
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h4 class="modal-title">Resumen</h4>
+                            <h4 class="modal-title">{{ $product->name }}</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                               <i class="tim-icons icon-simple-remove"></i>
                             </button>
                           </div>
                           <div class="modal-body">
-
+ 
+                                    
                             <ul>
                             
                               <table>                                  
                                 <tbody>
                                   <td class="storetr">Precio:</td>
-                                    <td>{{ $product->precio }}</td>
-                                  </tr>
+                                  <td><strong>{{ $product->precio }}</strong></td>
+                                <tr>
                                     <td class="storetr">Código:</td>
-                                    <td>{{ $product->id }}</td>                                    
-                                  <tr>                                                                   
+                                    <td><strong>{{ $product->id }}</strong></td>                                    
+                                </tr>                                                               
                                 </tbody>
                               </table>
-                              <p>Detalle: {{ $product->description }}</p>
+                              <p>Detalle: &nbsp;&nbsp;&nbsp;<strong>{{ $product->description }}</strong></p>
                               <a type="button" href="{{ url('/pedidos/'.$product->id.'/create') }}" class="btn btn-primary">Pay</a>
                               
                                   <hr>
@@ -76,8 +76,8 @@
                                     <td><img  src="{{ asset('img/imgnequiqr.PNG') }}"></td>
                                   <tr> 
                                     <hr>
-                                    <p>Si lo deseas puedes comunicarte con nosotros</p>
-                                  <a type="button" href="https://wa.me/573008905764?text=%20Hola! %20estoy%20interezado%20en%20este%20producto%20:%20{{  $product->name }}%20id:%20{{  $product->id }}" class="btn btn-info" target="_blank" >Message</a>
+                                    <p>Si quieres comprar contra entrega envíanos un mensaje</p>
+                                      <a type="button" href="https://wa.me/573008905764?text=%20Hola! %20estoy%20interezado%20en%20este%20producto%20:%20{{  $product->name }}%20id:%20{{  $product->id }}" class="btn btn-info" target="_blank" >Message</a><hr>
                           </div>
                           <div class="modal-footer">
                             <a href="">Términos y condiciones.</a>

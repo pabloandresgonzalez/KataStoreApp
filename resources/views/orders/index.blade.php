@@ -7,7 +7,10 @@
     <div class="card  card-plain">
       <div class="card-header">
         <h4 class="card-title"> Orders  </h4>
-        <p class="category"> Validate and manage your orders</p>        
+        <p class="category"> Validate and manage your orders</p>
+        <div>
+        <p class="text">Total de ordenes creadas  {{ $tolOrders }}</p>
+      </div>        
       </div>
       
 
@@ -20,9 +23,7 @@
           </div>
       @endif
 
-      <div>
-        <a href="{{ route('createproduct')  }}" class="btn btn-primary btn-link">New order</a>
-      </div>
+      
 
       <!-- Form -->
       <form class="">
@@ -44,38 +45,41 @@
               <tr>
                 <th class="text-center">id</th>
                 <th class="text-center">name</th>
-                <th class="text-center">product</th>
-                <th class="text-center">categoria</th>
-                <th class="text-center">estado</th>
+                <th class="text-center">#product</th>
+                <th class="text-center">estado actual</th>
                 <th class="text-center">description</th>
                 <th class="text-center">precio</th>
                 <th class="text-center">cantidad</th>
                 <th class="text-center">observacion</th>
                 <th class="text-center">total</th>
-                <th class="text-center">Imagen</th>
-                <th class="text-center">created</th>
-                <th class="text-center">updated</th>
-                <th class="text-center">edit order</th>
+                <th class="text-center">soporte de pago</th>
+                <th class="text-center">creado</th>
+                <th class="text-center">actualizado</th>
               </tr>
             </thead>
             <tbody>
             @foreach ($news as $pedido)
-              <tr>                
+
+            
+              <tr>         
                 <td class="text-center">
-                  {{ $pedido->id }}
-                </td>
+                   {{ $pedido->id }}
+                </td>  
                 <td class="text-center">
                   {{ $pedido->name}}
                 </td>
                 <td class="text-center">
                   {{ $pedido->id_product }}
                 </td>
-                <td class="text-center">
-                  {{ $pedido->categoryProd_id }}
+                <td class="text-center">                  
+                  <form action="" method="POST">
+                    @csrf
+                      @method('')                
+                  <a class="btn btn-primary btn-link" href="{{ url('/pedidos/'.$pedido->id.'/edit') }}">
+                    {{ $pedido->estado }}
+                  </form>                  
                 </td>
-                <td class="text-center">
-                  {{ $pedido->estado }}
-                </td>
+                </a> 
                 <td class="text-center">
                   {{ $pedido->description }}
                 </td>
@@ -100,16 +104,8 @@
                 <td class="text-center">
                   {{ $pedido->updated_at }}
                 </td>
-                <td class="text-center">
-                  <form action="" method="POST">
-                    @csrf
-                      @method('')
-                      <div class="card-footer">                       
-                        <a href="{{ url('/pedidos/'.$pedido->id.'/edit') }}" class="btn btn-fill btn-primary">{{ __('Edit') }}</a>
-                      </div>
-                  </form>
-                </td>
                </tr>
+               
                @endforeach  
           	 
             </tbody>
@@ -118,7 +114,7 @@
         
         
           <ul class="pagination justify-content-center">
-            <li class="page-item" ></li>            
+            <li class="page-item" >{!! $news->links() !!}</li>         
           </ul>
        
      

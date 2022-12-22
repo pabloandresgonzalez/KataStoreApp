@@ -23,7 +23,7 @@ Route::get('/', function () {
 });
 */
 
-
+// Tiemda
 Route::get('/', 'App\Http\Controllers\Controller@indexstore')->name('indexstore');
 Route::get('/avatar/{filename?}', [App\Http\Controllers\Controller::class, 'getImage'])->name('/.avatar');
 //Route::get('/welcome/avatar/{filename?}', 'App\Http\Controllers\Controller@getImage')->name('product.avatar');
